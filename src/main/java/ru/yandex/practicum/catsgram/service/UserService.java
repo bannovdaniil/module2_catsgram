@@ -32,10 +32,6 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        User user = null;
-        if (users.containsKey(email)) {
-            user = users.get(email);
-        }
-        return user;
+        return users.getOrDefault(email, null);
     }
 }
