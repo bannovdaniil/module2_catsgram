@@ -5,17 +5,19 @@ import ru.yandex.practicum.catsgram.exception.InvalidEmailException;
 import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
 import ru.yandex.practicum.catsgram.model.User;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {
     private final Map<String, User> users = new HashMap<>();
 
-    public List<User> findAll() {
-        return new ArrayList<>(users.values());
+    public Collection<User> findAll() {
+        return users.values();
     }
 
-    public User create(User user) {
+    public User createUser(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank()) {
             throw new InvalidEmailException("Адрес электронной почты не может быть пустым.");
         }
@@ -24,11 +26,10 @@ public class UserService {
                     user.getEmail() + " уже зарегистрирован.");
         }
         users.put(user.getEmail(), user);
-
         return user;
     }
 
-    public User update(User user) {
+    public User updateUser(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank()) {
             throw new InvalidEmailException("Адрес электронной почты не может быть пустым.");
         }
@@ -38,7 +39,9 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        return users.getOrDefault(email, null);
+        if (email == null) {
+            return null;
+        }
+        return users.get(email);
     }
-
 }
