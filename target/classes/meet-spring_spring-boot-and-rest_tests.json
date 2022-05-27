@@ -1,0 +1,400 @@
+{
+"info": {
+"_postman_id": "7a322de1-38d2-46e8-ae43-b41993acc9f6",
+"name": "REST и Spring",
+"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+},
+"item": [
+{
+"name": "users",
+"item": [
+{
+"name": "create user",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Test user\", function () {\r",
+"    var jsonData = pm.response.json();\r",
+"    pm.expect(jsonData.email).to.eql('email@yandex.com');\r",
+"    pm.expect(jsonData.nickname).to.eql('Nick Name');\r",
+"    pm.expect(jsonData.birthdate).to.eql('2001-04-03');\r",
+"});"
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "POST",
+"header": [
+{
+"key": "Content-Type",
+"value": "application/json",
+"type": "text"
+},
+{
+"key": "Accept",
+"value": "*/*",
+"type": "text"
+}
+],
+"body": {
+"mode": "raw",
+"raw": "{\r\n  \"email\": \"email@yandex.com\",\r\n  \"nickname\": \"Nick Name\",\r\n  \"birthdate\": \"2001-04-03\"\r\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/users",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"users"
+]
+}
+},
+"response": []
+},
+{
+"name": "update user",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Test user\", function () {\r",
+"    var jsonData = pm.response.json();\r",
+"    pm.expect(jsonData.email).to.eql('email@yandex.com');\r",
+"    pm.expect(jsonData.nickname).to.eql('Update Name');\r",
+"    pm.expect(jsonData.birthdate).to.eql('2020-01-30');\r",
+"});"
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "PUT",
+"header": [
+{
+"key": "Content-Type",
+"value": "application/json",
+"type": "text"
+},
+{
+"key": "Accept",
+"value": "*/*",
+"type": "text"
+}
+],
+"body": {
+"mode": "raw",
+"raw": "{\r\n  \"email\": \"email@yandex.com\",\r\n  \"nickname\": \"Update Name\",\r\n  \"birthdate\": \"2020-01-30\"\r\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/users",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"users"
+]
+}
+},
+"response": []
+},
+{
+"name": "find All users",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Test email\", function () {\r",
+"    var jsonData = pm.response.json();\r",
+"    pm.expect(jsonData.length).to.eql(1);\r",
+"    pm.expect(jsonData[0].email).to.eql('email@yandex.com');\r",
+"});"
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "GET",
+"header": [
+{
+"key": "Accept",
+"value": "*/*",
+"type": "text"
+}
+],
+"url": {
+"raw": "{{baseUrl}}/users",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"users"
+]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "home Page",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Котограм\", function () {\r",
+"    pm.expect(pm.response.text()).to.include(\"Котограм\");\r",
+"});"
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "GET",
+"header": [
+{
+"key": "Accept",
+"value": "*/*"
+}
+],
+"url": {
+"raw": "{{baseUrl}}/home",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"home"
+]
+}
+},
+"response": [
+{
+"name": "OK",
+"originalRequest": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/home",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"home"
+]
+}
+},
+"status": "OK",
+"code": 200,
+"_postman_previewlanguage": "text",
+"header": [
+{
+"key": "Content-Type",
+"value": "*/*"
+}
+],
+"cookie": [],
+"body": "dolor irure esse"
+}
+]
+},
+{
+"name": "create",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+""
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "POST",
+"header": [
+{
+"key": "Content-Type",
+"value": "application/json"
+}
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"author\": \"dolore labore elit proident ut\",\n  \"creationDate\": \"1945-01-12T16:24:50.828Z\",\n  \"description\": \"aute tempor\",\n  \"photoUrl\": \"dolor et exercitation deserunt\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/post",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"post"
+]
+}
+},
+"response": [
+{
+"name": "OK",
+"originalRequest": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"author\": \"dolore labore elit proident ut\",\n  \"creationDate\": \"1945-01-12T16:24:50.828Z\",\n  \"description\": \"aute tempor\",\n  \"photoUrl\": \"dolor et exercitation deserunt\"\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "{{baseUrl}}/post",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"post"
+]
+}
+},
+"status": "OK",
+"code": 200,
+"_postman_previewlanguage": "text",
+"header": [
+{
+"key": "Content-Type",
+"value": "text/plain"
+}
+],
+"cookie": [],
+"body": ""
+}
+]
+},
+{
+"name": "find All",
+"event": [
+{
+"listen": "test",
+"script": {
+"exec": [
+"pm.test(\"Status code is 200\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Test author\", function () {\r",
+"    var jsonData = pm.response.json();\r",
+"    pm.expect(jsonData.length).to.above(0);\r",
+"    pm.expect(jsonData[0].author).to.eql('dolore labore elit proident ut');\r",
+"});"
+],
+"type": "text/javascript"
+}
+}
+],
+"request": {
+"method": "GET",
+"header": [
+{
+"key": "Accept",
+"value": "*/*"
+}
+],
+"url": {
+"raw": "{{baseUrl}}/posts",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"posts"
+]
+}
+},
+"response": [
+{
+"name": "OK",
+"originalRequest": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/posts",
+"host": [
+"{{baseUrl}}"
+],
+"path": [
+"posts"
+]
+}
+},
+"status": "OK",
+"code": 200,
+"_postman_previewlanguage": "text",
+"header": [
+{
+"key": "Content-Type",
+"value": "*/*"
+}
+],
+"cookie": [],
+"body": ""
+}
+]
+}
+],
+"event": [
+{
+"listen": "prerequest",
+"script": {
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+},
+{
+"listen": "test",
+"script": {
+"type": "text/javascript",
+"exec": [
+""
+]
+}
+}
+],
+"variable": [
+{
+"key": "baseUrl",
+"value": "http://localhost:8080",
+"type": "string"
+}
+]
+}
