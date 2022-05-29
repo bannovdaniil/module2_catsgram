@@ -7,6 +7,15 @@ public class User {
     private String nickname;
     private LocalDate birthdate;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", birthdate=" + birthdate +
+                '}';
+    }
+
     public String getEmail() {
         return email;
     }
