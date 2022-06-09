@@ -5,10 +5,7 @@ import ru.yandex.practicum.catsgram.exception.InvalidEmailException;
 import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
 import ru.yandex.practicum.catsgram.model.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -33,5 +30,9 @@ public class UserService {
 
     public User findUserByEmail(String email) {
         return users.getOrDefault(email, null);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(users.getOrDefault(email, null));
     }
 }
