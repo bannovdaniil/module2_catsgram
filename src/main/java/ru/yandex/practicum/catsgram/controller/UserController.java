@@ -23,14 +23,17 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{email}}")
+    @GetMapping("/{email}")
     public Optional<User> findAll(@PathVariable Optional<String> email) {
-        return email.map(userService::findByEmail).orElse(null);
+        if (email.isPresent()) {
+            return userService.findByEmail(email.get());
+        }
+        return null;
     }
 
     @PostMapping
     public User create(@RequestBody User user) {
-        return user;
+        return userService.create(user);
     }
 
     @PutMapping
