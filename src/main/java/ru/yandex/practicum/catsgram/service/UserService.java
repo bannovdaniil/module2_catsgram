@@ -28,11 +28,17 @@ public class UserService {
         return user;
     }
 
+    public User update(User user) {
+        if (user.getEmail() == null || user.getEmail().isBlank()) {
+            throw new InvalidEmailException("Адрес электронной почты не может быть пустым.");
+        }
+        users.put(user.getEmail(), user);
+
+        return user;
+    }
+
     public User findUserByEmail(String email) {
         return users.getOrDefault(email, null);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return Optional.ofNullable(users.getOrDefault(email, null));
-    }
 }
