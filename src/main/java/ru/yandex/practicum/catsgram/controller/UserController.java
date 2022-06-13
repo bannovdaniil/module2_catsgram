@@ -25,6 +25,7 @@ public class UserController {
 
     @GetMapping("/user/{email}")
     public User findAll(@PathVariable Optional<String> email) {
+        // size, sort и from.
         if (email.isPresent()) {
             return userService.findUserByEmail(email.get());
         }
