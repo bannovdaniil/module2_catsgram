@@ -15,41 +15,28 @@ import java.util.Optional;
 public class PostService {
     private final List<Post> posts = new ArrayList<>();
     private final UserService userService;
-    private int size = 10;
-    private String sort = "asc";
-    private int page = 1;
 
     @Autowired
     public PostService(UserService userService) {
         this.userService = userService;
     }
 
-    public List<Post> findAll(int size, String sort, int page) {
+    public List<Post> findAll(int size, String sort, int pageFrom) {
         List<Post> subPost = new ArrayList<>(posts);
-        if (posts.size() > 0 || posts.size() >= page) {
-            int from = posts.size() <= page ? posts.size() - 1 : page -1;
-            int to = posts.size() >= from + size ? from + size : posts.size();
-
-            if (size == 10 && page == 1 && "default".equals(sort)) {
-                subPost = posts.subList(from, to);
-            } else {
-                if (this.size == size && this.page == (page - size) && sort.equals(this.sort)) {
-                    this.page = page;
-                    subPost = posts.subList(from, to);
-                } else {
-                    this.size = size;
-                    this.page = page;
-                    this.sort = sort;
-
-                    subPost = posts.subList(from, to);
-                }
-            }
-
+        int postFrom = (pageFrom * size) + 1;
+        if (postFrom <= posts.size() && (posts.size() > 0 || posts.size() >= postFrom)) {
             if ("desc".equals(sort)) {
                 Collections.sort(subPost, Collections.reverseOrder());
             } else {
                 Collections.sort(subPost);
             }
+
+            int from = posts.size() <= postFrom ? posts.size() - 1 : postFrom - 1;
+            int to = posts.size() >= from + size ? from + size : posts.size();
+
+            subPost = subPost.subList(from, to);
+        } else {
+            subPost = new ArrayList<>();
         }
         return subPost;
     }
