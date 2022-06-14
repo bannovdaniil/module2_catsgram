@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -65,5 +66,13 @@ public class PostService {
         return posts.stream()
                 .filter(x -> x.getId() == postId)
                 .findFirst();
+    }
+
+    public List<Post> findAllByUserEmail(String friendEmail, Integer size, String sort) {
+        List<Post> allSortPost = findAll(posts.size(), sort, 0);
+        return allSortPost.stream()
+                .filter(post -> friendEmail.equals(post.getAuthor()))
+                .limit(size)
+                .collect(Collectors.toList());
     }
 }
